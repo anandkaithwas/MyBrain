@@ -10,15 +10,17 @@ val releaseKeyAlias = providers.environmentVariable("SIGNING_KEY_ALIAS").orNull
 val releaseKeyPassword = providers.environmentVariable("SIGNING_KEY_PASSWORD").orNull
 
 android {
+    // Keep the source namespace stable to avoid a risky package-wide refactor.
+    // The distinct applicationId makes MyMind install independently of MyBrain.
     namespace = "com.mhss.app.mybrain"
     compileSdk = libs.versions.compileSdk.get().toInt()
 
     defaultConfig {
-        applicationId = "com.mhss.app.mybrain"
+        applicationId = "app.mymind.productivity"
         minSdk = libs.versions.minSdk.get().toInt()
         targetSdk = libs.versions.targetSdk.get().toInt()
-        versionCode = 21
-        versionName = "3.7.0"
+        versionCode = 1
+        versionName = "1.0.0"
 
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
         vectorDrawables {
@@ -61,7 +63,7 @@ android {
             isMinifyEnabled = false
             applicationIdSuffix = ".debug"
             isDebuggable = true
-            resValue("string", "app_name", "MyBrain Debug")
+            resValue("string", "app_name", "MyMind Debug")
         }
     }
     compileOptions {

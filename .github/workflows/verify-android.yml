@@ -2,6 +2,9 @@ name: Verify Android
 
 on:
   pull_request:
+  push:
+    branches:
+      - mymind-development
   workflow_dispatch:
 
 permissions:
