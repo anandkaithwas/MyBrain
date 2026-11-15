@@ -12,7 +12,7 @@ permissions:
 
 jobs:
   verify:
-    name: Run tests and build release APK
+    name: Run tests and build installable APK
     runs-on: ubuntu-latest
 
     steps:
@@ -34,13 +34,16 @@ jobs:
       - name: Run tests
         run: ./gradlew testAndroidHostTest --rerun-tasks -q
 
-      - name: Build app
+      - name: Build release variant
         run: ./gradlew :androidApp:assembleRelease --no-daemon
 
-      - name: Upload release APK
+      - name: Build installable debug APK
+        run: ./gradlew :androidApp:assembleDebug --no-daemon
+
+      - name: Upload installable debug APK
         uses: actions/upload-artifact@v4
         with:
-          name: MyMind-release-apk
-          path: androidApp/build/outputs/apk/release/*.apk
+          name: MyMind-debug-installable
+          path: androidApp/build/outputs/apk/debug/*.apk
           if-no-files-found: error
           retention-days: 14
