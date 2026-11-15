@@ -61,6 +61,7 @@ import androidx.compose.ui.graphics.graphicsLayer
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import com.mhss.app.domain.model.AiMessage
+import com.mhss.app.presentation.components.VoiceInputButton
 import com.mhss.app.domain.model.AiMessageAttachment
 import com.mhss.app.domain.model.Note
 import com.mhss.app.domain.model.SubTask
@@ -95,6 +96,7 @@ fun AssistantChatBar(
     liquidState: LiquidState,
     attachments: List<AiMessageAttachment>,
     onTextChange: (String) -> Unit,
+    onVoiceResult: (String) -> Unit,
     onAttachClick: () -> Unit,
     onRemoveAttachment: (Int) -> Unit,
     onSend: () -> Unit,
@@ -174,7 +176,7 @@ fun AssistantChatBar(
                             )
                         }
                     )
-                    if (loading) {
+                    if (!loading) {\n                        VoiceInputButton(\n                            enabled = true,\n                            onResult = onVoiceResult,\n                        )\n                    }\n                    if (loading) {
                         IconButton(onClick = { onCancel() }) {
                             Box(contentAlignment = Alignment.Center) {
                                 Icon(
@@ -381,8 +383,7 @@ private fun AssistantChatBarPreviewContent() {
                 )
             ),
             loading = true,
-            onTextChange = {},
-            onAttachClick = {},
+            onTextChange = {},\n            onVoiceResult = {},\n            onAttachClick = {},
             onRemoveAttachment = {},
             onSend = {},
             onCancel = {},

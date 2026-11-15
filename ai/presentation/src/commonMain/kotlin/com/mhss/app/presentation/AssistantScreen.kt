@@ -203,6 +203,7 @@ fun AssistantScreenContent(
                     enabled = aiEnabled && !loading && text.isNotBlank(),
                     attachments = attachments,
                     onTextChange = { text = it },
+                    onVoiceResult = { spoken -> text = listOf(text, spoken).filter { it.isNotBlank() }.joinToString(" ") },
                     onAttachClick = { attachmentsMenuExpanded = true },
                     onRemoveAttachment = {
                         onEvent(AssistantEvent.RemoveAttachment(it))
