@@ -68,7 +68,7 @@ fun DashboardScreen(
                     )
                 }
             }
-            item { MiraWelcomeCard() }
+            item { MiraWelcomeCard(onTalkToMira = { navController.navigate(Screen.AssistantScreen) }) }
             item {
                 Text(
                     text = "Your day",
@@ -104,7 +104,7 @@ fun DashboardScreen(
 }
 
 @Composable
-private fun MiraWelcomeCard() {
+private fun MiraWelcomeCard(onTalkToMira: () -> Unit) {
     Card(
         modifier = Modifier.fillMaxWidth().padding(horizontal = 16.dp),
         shape = RoundedCornerShape(28.dp),
@@ -137,6 +137,16 @@ private fun MiraWelcomeCard() {
                     color = MindInk
                 )
                 Text("YOUR WORLD, IN SYNC", style = MaterialTheme.typography.labelSmall, color = MindDeepMint, fontWeight = FontWeight.Bold)
+                androidx.compose.material3.FilledTonalButton(
+                    onClick = onTalkToMira,
+                    shape = RoundedCornerShape(18.dp),
+                    colors = androidx.compose.material3.ButtonDefaults.filledTonalButtonColors(
+                        containerColor = Color(0xFF238C70),
+                        contentColor = Color.White
+                    )
+                ) {
+                    Text("🎙  Talk to Mira", fontWeight = FontWeight.SemiBold)
+                }
             }
         }
     }
